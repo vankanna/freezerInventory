@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>POST IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- favicon - https://realfavicongenerator.net -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<!--<link rel="manifest" href="images/site.webmanifest">-->
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-config" content="images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- fonts / icons / css -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons|Caveat+Brush|Coming+Soon' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@3.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+<div id="app">
+    <v-app>
+        <!-- TOP TOOLBAR -->
+        <v-app-bar color="primary" app fixed>
+            <v-img
+                    class="mx-2"
+                    src="./images/freezelogo.png"
+                    max-height="40"
+                    max-width="40"
+                    contain
+            ></v-img>
+
+            <span class="site-title">Freezer Inventory</span>
+
+            <v-spacer></v-spacer>
+
+            <!-- SEARCH BUTTON AND FIELD -->
+            <v-layout justify-end>
+                <v-flex shrink>
+                    <v-expand-x-transition>
+                        <div v-show="searching">
+                            <v-text-field name="search" label="Search" id="searchbar"
+                                          text hide-details solo-inverted repend-inner-icon="search"
+                                          v-model="searchTerm">
+
+                            </v-text-field>
+                        </div>
+                    </v-expand-x-transition>
+                </v-flex>
+                <v-btn text icon @click="searching = !searching"><v-icon>search</v-icon></v-btn>
+            </v-layout>
+        </v-app-bar>
+
+        <!-- MAIN CONTENT AREA -->
+        <v-main class="grey lighten-4" fluid grid-list-md text-xs-center>
+            <v-layout justify-center>
+                <v-flex>
+                    <v-container fluid>
+                        <v-row
+                                :align="align"
+                                style="height: 150px;"
+                        >
+                            <v-col>
+                                <h3>Category</h3>
+                                <v-radio-group
+                                        v-model="col"
+                                        row
+                                >
+                                    <v-radio
+                                            label="Meat"
+                                            value="radio-1"
+                                    ></v-radio>
+                                    <v-radio
+                                            label="Vegetable"
+                                            value="radio-2"
+                                    ></v-radio>
+                                    <v-radio
+                                            label="Fruit"
+                                            value="radio-3"
+                                    ></v-radio>
+                                    <v-radio
+                                            label="Snack"
+                                            value="radio-4"
+                                    ></v-radio>
+                                    <v-radio
+                                            label="Other"
+                                            value="radio-3"
+                                    ></v-radio>
+                                </v-radio-group>
+                            </v-col>
+                             <v-col
+                                    cols="12"
+                                    lg="6"
+                            >
+                            <p>Date in ISO format: <strong>{{ date }}</strong></p>
+                                <v-menu
+                                        ref="menu1"
+                                        v-model="menu1"
+                                        :close-on-content-click="false"
+                                        transition="scale-transition"
+                                        offset-y
+                                        max-width="290px"
+                                        min-width="auto"
+                                >
+                                    <template v-slot:activator="{ on, attrs }">
+                                        <v-text-field
+                                                v-model="dateFormatted"
+                                                label="Date"
+                                                hint="MM/DD/YYYY format"
+                                                persistent-hint
+                                                prepend-icon="mdi-calendar"
+                                                v-bind="attrs"
+                                                @blur="date = parseDate(dateFormatted)"
+                                                v-on="on"
+                                        ></v-text-field>
+                                    </template>
+                                    <v-date-picker
+                                            v-model="date"
+                                            no-title
+                                            @input="menu1 = false"
+                                    ></v-date-picker>
+                                </v-menu>
+                            </v-col>
+                        </v-row>
+
+                    </v-container>
+                    <v-container grid-list-lg fluid justify-space-around align-content-start >
+                        <v-layout class="items" >
+                            <v-flex v-if="!filteredItems.length" class="no-item">
+                                <!-- image borrowed for education purposes only -->
+                                <!-- source https://www.grammarly.com/blog/duly-itemd/ -->
+                                <v-img src="images/dont-forget-it-post-it.gif" contain></v-img>
+                            </v-flex>
+
+                            <item v-for="(item, i) in filteredItems" v-on:delete-item="deleteItem" class="item" :item="item" ></item>
+                        </v-layout>
+
+                        <!-- FAB (Floating Action Button)-->
+                        <v-btn color="deep-purple" dark fab fixed bottom right @click="addItem">
+                            <v-icon>add</v-icon>
+                        </v-btn>
+
+                    </v-container>
+                </v-flex>
+
+            </v-layout>
+        </v-main>
+
+        <!-- FOOTER -->
+        <v-footer class="pa-3" color="primary">
+            <v-spacer></v-spacer>
+            <div>&copy; {{ new Date().getFullYear() }} — <strong>Freezer Inventory</strong></div>
+            <v-spacer></v-spacer>
+        </v-footer>
+
+    </v-app>
+</div>
+
+<!-- Vue Application -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+<script src="js/app-models.js"></script>
+<script src="js/components/item.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

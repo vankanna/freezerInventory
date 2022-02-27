@@ -1,0 +1,136 @@
+/*.application .item, .application .v-input {*/
+/*    font-family: 'Coming Soon', 'Roboto', cursive;*/
+/*    font-size: 1.1em;*/
+/*}*/
+/*.v-toolbar .site-title {*/
+/*    font-family: 'Caveat Brush', cursive;*/
+/*    font-size: 2.2em;*/
+/*    padding-left: 10px;*/
+/*    white-space: nowrap;*/
+/*}*/
+
+/*.v-toolbar .site-title {*/
+/*    font-family: 'Caveat Brush', cursive;*/
+/*    font-size: 2.2em;*/
+/*    padding-left: 10px;*/
+/*}*/
+
+/*.v-footer{*/
+/*    font-family: 'Caveat Brush', cursive;*/
+/*    font-size: 1.1em;*/
+/*}*/
+
+/*.v-list__tile__title{*/
+/*    font-family: 'Coming Soon', cursive;*/
+/*    font-size: 1.1em;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*!* -- ACTIONS -- *!*/
+/*.card-action-holder {*/
+/*    height: 44px;*/
+/*}*/
+
+/*.color-chooser {*/
+/*    overflow: hidden;*/
+/*    padding: 10px*/
+/*}*/
+
+/*.color-chooser .v-list__tile{*/
+/*    height: 40px;*/
+/*    padding: 0 10px;*/
+/*}*/
+
+/*.color-chooser > div {*/
+/*    float: left;*/
+/*}*/
+
+/*.color-chooser > div:nth-child(3n+1){*/
+/*    clear:both*/
+/*}*/
+
+
+/* -- items -- */
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 300px;
+    margin-bottom: 50px;
+}
+
+/*.item.flex {*/
+/*    background-color: #ffffff;*/
+
+/*    margin: 10px;*/
+/*    height:150px;*/
+/*}*/
+
+/*.no-item.flex {*/
+/*    margin-top: 5vh;*/
+/*    width: 100%;*/
+/*    flex: none;*/
+/*    max-width: 600px;*/
+/*}*/
+
+
+/*.item .v-card__text {*/
+/*    padding-top: 0;*/
+/*    height: 185px;*/
+/*    overflow-y: scroll;*/
+/*}*/
+
+/*.item .v-card__text::-webkit-scrollbar {*/
+/*    width: 12px;*/
+/*}*/
+
+/*.item .v-card__text::-webkit-scrollbar-track {*/
+/*    background: rgba(255, 255, 255, .5);*/
+/*}*/
+
+/*.item .v-text-field--full-width>.v-input__control>.v-input__slot,*/
+/*.item .v-text-field.v-text-field--solo .v-input__control {*/
+/*    min-height: 0;*/
+/*}*/
+/*.item .v-text-field--full-width.v-text-field--single-line input {*/
+/*    margin-top: 0px;*/
+/*}*/
+
+/*.item textarea {*/
+/*    height: 85px;*/
+/*}*/
+
+/*.theme--light.v-text-field--solo>.v-input__control>.v-input__slot  {*/
+/*    background: rgba(255, 255, 255, 0.5);*/
+/*}*/
+
+/*.item .v-card__title {*/
+/*    padding: 10px 16px;*/
+/*    min-height: 56px;*/
+/*}*/
+
+/*.item .v-card__title h3 {*/
+/*    !*padding: 6px 0;*!*/
+/*}*/
+
+/*!* BACKGROUNDS *!*/
+/*.trash {*/
+/*    background-image: url("../images/trash-bg.jpg");*/
+/*    background-repeat: repeat;*/
+/*    background-size: 200px 200px;*/
+/*}*/
+
+/*.trash > .v-content__wrap {*/
+/*    background: rgba(255, 255, 255, .5);*/
+/*}*/
+
+/*.archive {*/
+/*    background-image: url("../images/archive-bg.jpg");*/
+/*    background-size: 100%;*/
+/*    background-repeat: repeat-y;*/
+/*}*/
+
+/*.v-content[data-booted=true] {*/
+/*    transition: none; !* prevents weird seizure causing bug with backgrounds in Safari *!*/
+/*}*/
