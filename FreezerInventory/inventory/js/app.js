@@ -14,6 +14,7 @@ const app = new Vue({
         }
     }),
     data: {
+
         items: [
             new Item("Ice Cream", "other","02/12/2024",4),
             new Item("Pork", "Meat","02/12/2024",4),

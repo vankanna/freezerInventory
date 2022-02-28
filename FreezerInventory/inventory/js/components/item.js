@@ -26,7 +26,6 @@ Vue.component('Item', {
             }
         },
         editItem: function(){
-            console.log(this.item.id);
             this.$emit('edit-item', this.item.id);
         },
         saveItem: function(){

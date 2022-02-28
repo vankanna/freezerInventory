@@ -30,16 +30,18 @@ Vue.component('EditItem',{
           :value="overlay"
         >
         <v-flex>
-            <v-card class="item-overlay" min-width="250px" >
-                <div>{{item.category}}</div>
-                <p class="text-h4 text--primary">{{item.name}}</p>
+            <v-card  light class="item-overlay pa-6" min-width="250px" >
+                 <category-select v-model="item.category"></category-select>
+                 <v-text-field label="Name" v-model="item.name" light text-h4 solo full-width text></v-text-field>
+                 <v-text-field label="Expiration Date" v-model="item.expiration" text-h4 solo full-width hide-details text></v-text-field>
             </v-card>
         </v-flex>
           <v-btn
-            color="success"
+          block
+            color="primary"
             @click="overlay = false"
           >
-            Hide Overlay
+            Save
           </v-btn>
         </v-overlay>
         

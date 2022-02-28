@@ -90,7 +90,7 @@
                                     ></v-radio>
                                     <v-radio
                                             label="Other"
-                                            value="radio-3"
+                                            value="radio-5"
                                     ></v-radio>
                                 </v-radio-group>
                             </v-col>
@@ -98,7 +98,7 @@
                                     cols="12"
                                     lg="6"
                             >
-                            <p>Date in ISO format: <strong>{{ date }}</strong></p>
+                            <p><h3>Expiration Date: </h3><strong>{{ date }}</strong></p>
                                 <v-menu
                                         ref="menu1"
                                         v-model="menu1"
@@ -147,6 +147,7 @@
                     </v-container>
                     <edit-item v-if="itemToEdit" :item="itemToEdit" :overlay="true" v-on:reset="reset"></edit-item>
                 </v-flex>
+                <new-item></new-item>
 
             </v-layout>
         </v-main>
@@ -167,6 +168,9 @@
 <script src="js/app-models.js"></script>
 <script src="js/components/item.js"></script>
 <script src="js/components/editItem.js"></script>
+<script src="js/components/newItem.js"></script>
+<script src="js/components/categories.js"></script>
+
 <script src="js/app.js"></script>
 
 </body>
