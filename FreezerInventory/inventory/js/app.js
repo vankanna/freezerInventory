@@ -20,8 +20,8 @@ const app = new Vue({
             new Item("Pork", "Meat","02/12/2024",4),
             new Item("Jacks Pepperoni Pizza", "Other","02/12/2024",6),
             new Item("Grass Fed Top Sirloin Steak", "Meat", "02/12/2024", 10),
-            new Item("Ice", "Other","02/12/2024",16787777),
-            new Item("Beef", "Meat","02/12/2024",16787777),
+            new Item("Ice", "Other","02/12/2024",1),
+            new Item("Beef", "Meat","02/12/2024",1),
             new Item("Top Sirloin Steak", "Meat", "NA", 10),
 
         ],

@@ -9,7 +9,9 @@ Vue.component('Item', {
     data(){
         return {
             inventory: this.quantity,
-
+            overlay: {
+                show: false,
+            },
         }
     },
 
@@ -42,7 +44,7 @@ Vue.component('Item', {
                           color="primary"
                           length="5"
                         ></v-rating><br><br>
-                    <v-col><div>{{item.category}}</div></v-col>         
+                    <v-col><div class="category">{{item.category}}</div></v-col>         
                    
                 </v-row>
                 
@@ -62,10 +64,10 @@ Vue.component('Item', {
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
-                    <v-btn text @click="editItem()">Edit</v-btn>
+                    <v-btn text @click="overlay.show=true">Edit</v-btn>
                     <v-btn color="error" @click="deleteItem()" text>Delete</v-btn>
                 </v-card-actions>
-                
+                <edit-item :item="item" :overlay="overlay" v-on:reset="reset"></edit-item>
             </v-card>
         </v-flex>
     `,
