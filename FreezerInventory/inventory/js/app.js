@@ -23,6 +23,7 @@ const app = new Vue({
             new Item("Grass Fed Top Sirloin Steak", "other", "NA", 10),
 
         ],
+        itemToEdit: false,
         searching: false,
         searchTerm: '',
     },
@@ -31,9 +32,16 @@ const app = new Vue({
         addItem: function(){
             this.items.unshift(new Item());
         },
+        editItem: function (id){
+            const index = this.items.findIndex(i => i.id === id)
+            this.itemToEdit = this.items[index]
+        },
         deleteItem: function(id){
             const index = this.items.findIndex(i => i.id === id)
             this.items.splice(index,1)
+        },
+        reset: function(){
+            this.itemToEdit = null;
         }
     },
 

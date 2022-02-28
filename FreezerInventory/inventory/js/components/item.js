@@ -4,9 +4,6 @@ Vue.component('Item', {
             type: Item,
             required: true,
         },
-        index: {
-
-        }
     },
 
     data(){
@@ -29,13 +26,13 @@ Vue.component('Item', {
             }
         },
         editItem: function(){
-            this.item.editing = true;
+            console.log(this.item.id);
+            this.$emit('edit-item', this.item.id);
         },
         saveItem: function(){
             this.item.editing = false;
         },
         deleteItem(){
-            console.log(this.id);
             this.$emit('delete-item', this.item.id);
         }
 
@@ -62,7 +59,7 @@ Vue.component('Item', {
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
-                    <v-btn text>Edit</v-btn>
+                    <v-btn text @click="editItem()">Edit</v-btn>
                     <v-btn color="error" @click="deleteItem()" text>Delete</v-btn>
                 </v-card-actions>
             </v-card>
