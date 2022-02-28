@@ -8,15 +8,12 @@ Vue.component('Item', {
 
     data(){
         return {
-            category: ['Meat', 'vegetable', 'fruit','snack'],
-            inventory: this.quantity
+            inventory: this.quantity,
+
         }
     },
 
     methods: {
-        setCategory: function(category) {
-            this.item.category = category;
-        },
         addInventory: function() {
             this.item.quantity +=1;
         },
@@ -28,9 +25,6 @@ Vue.component('Item', {
         editItem: function(){
             this.$emit('edit-item', this.item.id);
         },
-        saveItem: function(){
-            this.item.editing = false;
-        },
         deleteItem(){
             this.$emit('delete-item', this.item.id);
         }
@@ -41,8 +35,18 @@ Vue.component('Item', {
         <v-flex>
             <v-card class="item" min-width="250px" >
                 <v-card-text>
-                <div>{{item.category}}</div>
-                <p class="text-h4 text--primary">{{item.name}}</p>
+                <v-row><v-rating
+                          v-model="rating"
+                          background-color="indigo lighten-3"
+                          medium
+                          color="primary"
+                          length="5"
+                        ></v-rating><br><br>
+                    <v-col><div>{{item.category}}</div></v-col>         
+                   
+                </v-row>
+                
+                <p class="text-h4 text--primary pa-3">{{item.name}}</p>
                 <div class="d-flex justify-space-between">Expiration Date
                     <span class="d-flex justify-space-between">Quantity</span>
                 </div>
@@ -61,6 +65,7 @@ Vue.component('Item', {
                     <v-btn text @click="editItem()">Edit</v-btn>
                     <v-btn color="error" @click="deleteItem()" text>Delete</v-btn>
                 </v-card-actions>
+                
             </v-card>
         </v-flex>
     `,

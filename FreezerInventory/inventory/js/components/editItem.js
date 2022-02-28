@@ -13,7 +13,7 @@ Vue.component('EditItem',{
     data(){
         return {
             absolute: true,
-            overlay: this.overlay,
+            overlay: false,
         }
     },
 
@@ -25,24 +25,17 @@ Vue.component('EditItem',{
 
     template:
         `
-        <v-overlay
-          :absolute="absolute"
-          :value="overlay"
-        >
-        <v-flex>
-            <v-card  light class="item-overlay pa-6" min-width="250px" >
-                 <category-select v-model="item.category"></category-select>
-                 <v-text-field label="Name" v-model="item.name" light text-h4 solo full-width text></v-text-field>
-                 <v-text-field label="Expiration Date" v-model="item.expiration" text-h4 solo full-width hide-details text></v-text-field>
-            </v-card>
-        </v-flex>
-          <v-btn
-          block
-            color="primary"
-            @click="overlay = false"
-          >
+        <v-overlay :dark="false"  :absolute="absolute" :value="overlay" >
+            <v-flex>
+                <v-card  light class="item-overlay pa-6" min-width="250px" >
+                     <category-select v-model="item.category"></category-select>
+                     <v-text-field label="Name" v-model="item.name" light text-h4 solo full-width text></v-text-field>
+                     <v-text-field label="Expiration Date" v-model="item.expiration" text-h4 solo full-width hide-details text></v-text-field>
+                </v-card>
+            </v-flex>
+            <v-btn block  color="primary"  @click="overlay = false">
             Save
-          </v-btn>
+            </v-btn>
         </v-overlay>
         
         `

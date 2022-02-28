@@ -36,7 +36,7 @@
                     contain
             ></v-img>
 
-            <span class="site-title">Freezer Inventory</span>
+            <h4 class="site-title">Freezer Inventory</h4>
 
             <v-spacer></v-spacer>
 
@@ -45,11 +45,9 @@
                 <v-flex shrink>
                     <v-expand-x-transition>
                         <div v-show="searching">
-                            <v-text-field name="search" label="Search" id="searchbar"
-                                          text hide-details solo-inverted repend-inner-icon="search"
-                                          v-model="searchTerm">
-
-                            </v-text-field>
+                            <category-select
+                                          v-model="category">
+                            </category-select>
                         </div>
                     </v-expand-x-transition>
                 </v-flex>
@@ -61,95 +59,27 @@
         <v-main class="grey lighten-4" fluid grid-list-md text-xs-center>
             <v-layout justify-center>
                 <v-flex>
-                    <v-container fluid>
-                        <v-row
-                                :align="align"
-                                style="height: 150px;"
-                        >
-                            <v-col>
-                                <h3>Category</h3>
-                                <v-radio-group
-                                        v-model="col"
-                                        row
-                                >
-                                    <v-radio
-                                            label="Meat"
-                                            value="radio-1"
-                                    ></v-radio>
-                                    <v-radio
-                                            label="Vegetable"
-                                            value="radio-2"
-                                    ></v-radio>
-                                    <v-radio
-                                            label="Fruit"
-                                            value="radio-3"
-                                    ></v-radio>
-                                    <v-radio
-                                            label="Snack"
-                                            value="radio-4"
-                                    ></v-radio>
-                                    <v-radio
-                                            label="Other"
-                                            value="radio-5"
-                                    ></v-radio>
-                                </v-radio-group>
-                            </v-col>
-                             <v-col
-                                    cols="12"
-                                    lg="6"
-                            >
-                            <p><h3>Expiration Date: </h3><strong>{{ date }}</strong></p>
-                                <v-menu
-                                        ref="menu1"
-                                        v-model="menu1"
-                                        :close-on-content-click="false"
-                                        transition="scale-transition"
-                                        offset-y
-                                        max-width="290px"
-                                        min-width="auto"
-                                >
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-text-field
-                                                v-model="dateFormatted"
-                                                label="Date"
-                                                hint="MM/DD/YYYY format"
-                                                persistent-hint
-                                                prepend-icon="mdi-calendar"
-                                                v-bind="attrs"
-                                                @blur="date = parseDate(dateFormatted)"
-                                                v-on="on"
-                                        ></v-text-field>
-                                    </template>
-                                    <v-date-picker
-                                            v-model="date"
-                                            no-title
-                                            @input="menu1 = false"
-                                    ></v-date-picker>
-                                </v-menu>
-                            </v-col>
-                        </v-row>
-
-                    </v-container>
                     <v-container grid-list-lg fluid justify-space-around align-content-start >
                         <v-layout class="items" >
                             <v-flex v-if="!filteredItems.length" class="no-item">
                                 <!-- image borrowed for education purposes only -->
                                 <!-- source https://www.grammarly.com/blog/duly-itemd/ -->
-                                <v-img src="images/dont-forget-it-post-it.gif" contain></v-img>
+                                <v-img src="images/ice-bg.jpg" contain></v-img>
                             </v-flex>
 
                             <item v-for="(item, i) in filteredItems" v-on:delete-item="deleteItem" v-on:edit-item="editItem" class="item" :item="item" ></item>
                         </v-layout>
                         <!-- FAB (Floating Action Button)-->
-
-
+                        <v-btn color="success" dark fab fixed bottom right @click="addItem">
+                            <v-icon>add</v-icon>
+                        </v-btn>
 
                     </v-container>
                     <edit-item v-if="itemToEdit" :item="itemToEdit" :overlay="true" v-on:reset="reset"></edit-item>
                 </v-flex>
-                <new-item></new-item>
 
             </v-layout>
+
         </v-main>
 
         <!-- FOOTER -->

@@ -16,17 +16,18 @@ const app = new Vue({
     data: {
 
         items: [
-            new Item("Ice Cream", "other","02/12/2024",4),
+            new Item("Ice Cream", "Other","02/12/2024",4),
             new Item("Pork", "Meat","02/12/2024",4),
-            new Item("Jacks Pepperoni Pizza", "other","02/12/2024",6),
-            new Item("Grass Fed Top Sirloin Steak", "other", "02/12/2024", 10),
-            new Item("Ice", "other","02/12/2024",16787777),
-            new Item("Grass Fed Top Sirloin Steak", "other", "NA", 10),
+            new Item("Jacks Pepperoni Pizza", "Other","02/12/2024",6),
+            new Item("Grass Fed Top Sirloin Steak", "Meat", "02/12/2024", 10),
+            new Item("Ice", "Other","02/12/2024",16787777),
+            new Item("Beef", "Meat","02/12/2024",16787777),
+            new Item("Top Sirloin Steak", "Meat", "NA", 10),
 
         ],
         itemToEdit: false,
         searching: false,
-        searchTerm: '',
+        category: '',
     },
     methods: {
 
@@ -43,15 +44,15 @@ const app = new Vue({
         },
         reset: function(){
             this.itemToEdit = null;
-        }
+        },
     },
 
     computed: {
         filteredItems: function(){
-            let keyword = this.searchTerm.toLowerCase();
-            if(keyword){
+            let category = this.category;
+            if(category && this.searching){
                 return this.items.filter(function(item){
-                    return (item.title.toLowerCase().search(keyword) >= 0 || item.text.toLowerCase().search(keyword) >= 0);
+                    return (item.category.search(category) >= 0);
                 });
             }else{
                 return this.items.filter(function(item){
